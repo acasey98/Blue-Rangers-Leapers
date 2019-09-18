@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 
 namespace Leapers_Blue_Rangers
 {
@@ -6,7 +8,8 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            var Hosts = new List<Host>();
         }
     }
 }
