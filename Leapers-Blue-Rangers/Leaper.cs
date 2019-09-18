@@ -8,5 +8,6 @@ namespace Leapers_Blue_Rangers
     {
         public string Name { get; set; }
         public int ID { get; set; }
+
     }
 }
