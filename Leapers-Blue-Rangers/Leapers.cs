@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Leapers_Blue_Rangers
 {
-    class Class1
+    class Leaper
     {
+        public string Name { get; set; }
+        public int ID { get; set; }
     }
 }
