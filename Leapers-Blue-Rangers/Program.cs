@@ -84,7 +84,7 @@ namespace Leapers_Blue_Rangers
                 }
             };
 
-            var Leap = new List<Leap>();
+            
         }
     }
 }
