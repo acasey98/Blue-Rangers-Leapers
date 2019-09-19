@@ -85,6 +85,31 @@ namespace Leapers_Blue_Rangers
                     CurrentHostID = 1,
                 },
 
+<<<<<<< HEAD
+=======
+
+            var Leapers = new List<Leaper>() {
+
+                new Leaper
+                {
+                   ID = 0,
+                   Name = "Johnnie",
+                   CurrentDateTime = ,
+                   CurrentEventID = ,
+                   CurrentHostID = 5,
+
+                },
+
+                new Leaper
+                {
+                    ID = 1,
+                    Name = "Jesse",
+                    CurrentDateTime = ,
+                    CurrentEventID = ,
+                    CurrentHostID = 1,
+                },
+
+>>>>>>> master
                 new Leaper
                 {
                     ID = 3,
@@ -138,6 +163,9 @@ namespace Leapers_Blue_Rangers
                     Name = "Vladmir Putin"
                 }
             };
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
         }
     }
