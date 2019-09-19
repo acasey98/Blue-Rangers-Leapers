@@ -34,8 +34,6 @@ namespace Leapers_Blue_Rangers
                         { 7, false }
                     },
                     isPutRight = false
-
-<<<<<<< HEAD
                 },
                 new Event
                 {
@@ -62,33 +60,8 @@ namespace Leapers_Blue_Rangers
             {
                 return RandomNumber(0, Events.Count);
             }
-=======
 
-            var Leapers = new List<Leaper>() {
-
-                new Leaper
-                {
-                   ID = 0,
-                   Name = "Johnnie",
-                   CurrentDateTime = ,
-                   CurrentEventID = ,
-                   CurrentHostID = 5,
-
-                },
-
-                new Leaper
-                {
-                    ID = 1,
-                    Name = "Jesse",
-                    CurrentDateTime = ,
-                    CurrentEventID = ,
-                    CurrentHostID = 1,
-                },
-
-<<<<<<< HEAD
-=======
-
-            var Leapers = new List<Leaper>() {
+         /*   var Leapers = new List<Leaper>() {
 
                 new Leaper
                 {
@@ -109,7 +82,6 @@ namespace Leapers_Blue_Rangers
                     CurrentHostID = 1,
                 },
 
->>>>>>> master
                 new Leaper
                 {
                     ID = 3,
@@ -118,7 +90,7 @@ namespace Leapers_Blue_Rangers
                     CurrentEventID = ,
                     CurrentHostID = 6,
                 }
-            };
+            };*/
                   
             var Hosts = new List<Host>()
             {
@@ -163,15 +135,39 @@ namespace Leapers_Blue_Rangers
                     Name = "Vladmir Putin"
                 }
             };
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
-=======
 
-            
->>>>>>> master
+            var response = "";
+            var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
+            while (runsTheGame)
+            {
+                Console.WriteLine("Please select one of the following options or press 'q' to quit");
+                Console.WriteLine("1. Send a leaper on their next mission!");
+                Console.WriteLine("2. Fund more leaps!");
+                Console.WriteLine("3. Show past leaps");
+                response = Console.ReadLine();
+                while(response == "1")
+                {
+                    Console.WriteLine("You picked one");
+                    response = "";
+                    // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
+                }
+                while(response == "2")
+                {
+                    Console.WriteLine("You picked two");
+                    response = "";
+                    // Does the budget stuff, then at the end changes the response variable to an empty string which goes back to the main menu
+                }
+                while(response =="3")
+                {
+                    Console.WriteLine("You picked three");
+                    response = "";
+                    // Does the show past leaps stuff, then at the end changes the response variable to an empty string which goes back to the main menu
+                }
+                if (response.ToLower() == "q")
+                {
+                    break;
+                }
+            }
         }
     }
 }

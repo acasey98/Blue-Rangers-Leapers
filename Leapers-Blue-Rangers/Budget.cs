@@ -15,8 +15,8 @@ namespace Leapers_Blue_Rangers
 
         public Boolean BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
         {
-            var leaperDate = leaperToCheck.currentDateTime;
-            var eventDate = eventToCheck.dateTime;
+            var leaperDate = leaperToCheck.CurrentDateTime;
+            var eventDate = eventToCheck.DateTime;
             TimeSpan differenceBetweenDates = leaperDate - eventDate;
             // makes it a positive number incase it was a negative
             var differenceInDays = Math.Abs(differenceBetweenDates.Days);

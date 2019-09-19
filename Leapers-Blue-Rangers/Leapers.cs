@@ -8,7 +8,7 @@ namespace Leapers_Blue_Rangers
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string CurrentDateTime { get; set; }
+        public DateTime CurrentDateTime { get; set; }
         public int CurrentEventID { get; set; }
         public int CurrentHostID { get; set; }
 
