@@ -6,8 +6,10 @@ namespace Leapers_Blue_Rangers
 {
     class Leap
     {
-        public int EventID;
-        public int LeaperID;
+        public Leaper leaper { get; set; }
+        public Host host { get; set; }
+        public Event event { get; set; }
+
         public Leap()
         {
             
