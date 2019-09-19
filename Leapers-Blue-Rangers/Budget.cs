@@ -17,7 +17,7 @@ namespace Leapers_Blue_Rangers
         {
             var leaperDate = leaperToCheck.currentDateTime;
             var eventDate = eventToCheck.dateTime;
-            Timespan differenceBetweenDates = leaperDate - eventDate;
+            TimeSpan differenceBetweenDates = leaperDate - eventDate;
             // makes it a positive number incase it was a negative
             var differenceInDays = Math.Abs(differenceBetweenDates.Days);
 
