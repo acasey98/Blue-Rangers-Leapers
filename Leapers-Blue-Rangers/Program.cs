@@ -8,7 +8,6 @@ namespace Leapers_Blue_Rangers
         static void Main(string[] args)
         {
 
-
             var Leapers = new List<Leaper>() {
 
                 new Leaper
