@@ -10,6 +10,7 @@ namespace Leapers_Blue_Rangers
         public string Description { get; set; }
         public bool isPutRight { get; set; }
         public int ID { get; set; }
+        public string Location { get; set; }
         public Dictionary <int, bool> Hosts { get; set; }
 
     }
