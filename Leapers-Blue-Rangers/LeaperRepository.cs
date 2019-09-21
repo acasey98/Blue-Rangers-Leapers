@@ -7,9 +7,6 @@ namespace Leapers_Blue_Rangers
     class LeaperRepository
     {
         static List<Leaper> leapers = new List<Leaper>() { 
-
-         
-
                 new Leaper
                 {
                    ID = 0,
