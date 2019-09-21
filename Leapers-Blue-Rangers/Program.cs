@@ -8,61 +8,13 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {        
-<<<<<<< HEAD
-            var Hosts = new List<Host>()
-            {
-                new Host
-                {
-                    ID = 0,
-                    Name = "Cigar"
-                },
-                new Host
-                {
-                    ID = 1,
-                    Name = "Bill Clinton"
-                },
-                new Host
-                {
-                    ID = 2,
-                    Name = "Monica Lewinsky"
-                },
-                new Host
-                {
-                    ID = 3,
-                    Name = "Kanye West"
-                },
-                new Host
-                {
-                    ID = 4,
-                    Name = "VMA Judge"
-                },
-                new Host
-                {
-                    ID = 5,
-                    Name = "Voter"
-                },
-                new Host
-                {
-                    ID = 6,
-                    Name = "Donald Trump"
-                },
-                new Host
-                {
-                    ID = 7,
-                    Name = "Vladmir Putin"
-                }
-            };
-
             int RandomNumber(int min, int max)
             {
                 Random random = new Random();
                 return random.Next(min, max);
             }
 
-            Leaper pickALeaper()
-=======
             Leaper pickALeaper(string whyTheyPicked)
->>>>>>> master
             {
                 // changes the phrase shown depending on what option they picked
                 var doThisThing = (whyTheyPicked == "1" ? "get leapin": "show their leaps");
@@ -87,6 +39,18 @@ namespace Leapers_Blue_Rangers
                 return leaperPicked;
             }
 
+            Event pickRandomEvent(Leaper pickedLeaper)
+            {
+                var eventsRepo = new EventsRepository();
+                var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
+                if (eventsAvailableToLeap.Length > 0)
+                {
+                    var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
+                    return randomEvent;
+                }
+                return null;
+            }
+
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
             while (runsTheGame)
@@ -99,24 +63,14 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
-<<<<<<< HEAD
-                    var pickedLeaper = pickALeaper();
-                    var eventsRepo = new EventsRepository();
-                    var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickALeaper().CurrentDateTime).ToArray();
-                    if (eventsAvailableToLeap.Length > 0)
-                    {
-                        var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
-                    }
-
-                    /*                    var eventsRepo = new EventsRepository();
-                                        var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
-                                        // TODO If events is empty than GAMEOVER
-                                        var randomEvent = events[RandomNumber(0, events.Count())];
-                                        var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
-                    // if hostPicked is empty than find another event
-=======
                     var pickedLeaper = pickALeaper(response);
->>>>>>> master
+                    var randomEvent = pickRandomEvent(pickedLeaper);
+                    if (randomEvent == null)
+                    {
+                        Console.WriteLine("Congrats MFer, you won!");
+                        Console.ReadLine();
+                        response = "q";
+                    }
                     response = "";
                 }
                 while(response == "2")

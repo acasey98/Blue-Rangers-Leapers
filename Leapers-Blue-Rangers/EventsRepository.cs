@@ -6,12 +6,8 @@ namespace Leapers_Blue_Rangers
 {
     class EventsRepository
     {
-<<<<<<< HEAD
         static List<Event> _events = new List<Event>()
         {
-=======
-        static List<Event> _events = new List<Event>() {
->>>>>>> master
             new Event
                 {
                  ID = 0,
