@@ -44,13 +44,12 @@ namespace Leapers_Blue_Rangers
                     break;
             }
             Console.WriteLine($"Your new budget is ${_budget}.");
-            var pickedLeaper = pickALeaper();
         }
 
-        public static bool BudgetCheck(/*Leaper leaperToCheck, Event eventToCheck*/)
+        public static void BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
         {
-            var leaperDate = new DateTime(1993, 11, 08); //leaperToCheck.CurrentDateTime;
-            var eventDate = new DateTime(1943, 06, 12);//eventToCheck.DateTime;
+            var leaperDate = leaperToCheck.CurrentDateTime;
+            var eventDate = eventToCheck.DateTime;
             TimeSpan differenceBetweenDates = leaperDate - eventDate;
             // makes it a positive number incase it was a negative
             var travelCost = Math.Abs(differenceBetweenDates.Days) * 1000;
@@ -60,7 +59,6 @@ namespace Leapers_Blue_Rangers
             {
                 _budget -= travelCost;
                 Console.WriteLine($"New Budget: {_budget}.");
-                return true;
             }
             else
             {
@@ -71,7 +69,8 @@ namespace Leapers_Blue_Rangers
                 switch (choice)
                 {
                     case "1":
-                        AddMoney();                        
+                        AddMoney();
+                        BudgetCheck(leaperToCheck, eventToCheck);
                         break;
                     case "2":
                         Console.WriteLine("Returning to leaper selection.");
@@ -80,7 +79,6 @@ namespace Leapers_Blue_Rangers
                         Console.WriteLine("Invalid Input. Returning to leaper selection.");
                         break;
                 }
-                return false;
             }
         }
     }

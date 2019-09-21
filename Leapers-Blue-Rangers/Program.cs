@@ -45,18 +45,8 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
-<<<<<<< HEAD
-                    var pickedLeaper = pickALeaper();
-                    Budget.BudgetCheck(/*leaperToCheck, eventToCheck*/);
-/*                    var eventsRepo = new EventsRepository();
-                    var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
-                    // TODO If events is empty than GAMEOVER
-                    var randomEvent = events[RandomNumber(0, events.Count())];
-                    var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
-                    // if hostPicked is empty than find another event
-=======
                     var pickedLeaper = pickALeaper(response);
->>>>>>> master
+                    Budget.BudgetCheck(pickedLeaper, eventToCheck);
                     response = "";
                 }
                 while(response == "2")
