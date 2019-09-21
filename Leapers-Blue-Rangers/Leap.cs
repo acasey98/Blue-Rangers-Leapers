@@ -8,7 +8,7 @@ namespace Leapers_Blue_Rangers
     {
         public Leaper leaper { get; set; }
         public Host host { get; set; }
-        public Event event { get; set; }
+        public Event SingleEvent { get; set; }
 
         public Leap()
         {

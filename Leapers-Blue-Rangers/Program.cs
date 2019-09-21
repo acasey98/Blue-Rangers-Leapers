@@ -29,13 +29,11 @@ namespace Leapers_Blue_Rangers
                     Description = "Clinton testimony",
                     Hosts = new Dictionary<int, bool>
                     {
-                        { 5, false },
-                        { 6, false },
-                        { 7, false }
+                        { 0, false },
+                        { 1, false },
+                        { 2, false }
                     },
                     isPutRight = false
-
-<<<<<<< HEAD
                 },
                 new Event
                 {
@@ -44,9 +42,9 @@ namespace Leapers_Blue_Rangers
                     Description = "Kanye interrupts T-Swift VMA speech",
                     Hosts = new Dictionary<int, bool>
                     {
-                        { 5, false },
-                        { 6, false },
-                        { 7, false }
+                        { 3, false },
+                        { 4, false },
+                        { 5, false }
                     },
                     isPutRight = false
                 }
@@ -62,7 +60,6 @@ namespace Leapers_Blue_Rangers
             {
                 return RandomNumber(0, Events.Count);
             }
-=======
 
             var Leapers = new List<Leaper>() {
 
@@ -85,31 +82,6 @@ namespace Leapers_Blue_Rangers
                     CurrentHostID = 1,
                 },
 
-<<<<<<< HEAD
-=======
-
-            var Leapers = new List<Leaper>() {
-
-                new Leaper
-                {
-                   ID = 0,
-                   Name = "Johnnie",
-                   CurrentDateTime = ,
-                   CurrentEventID = ,
-                   CurrentHostID = 5,
-
-                },
-
-                new Leaper
-                {
-                    ID = 1,
-                    Name = "Jesse",
-                    CurrentDateTime = ,
-                    CurrentEventID = ,
-                    CurrentHostID = 1,
-                },
-
->>>>>>> master
                 new Leaper
                 {
                     ID = 3,
@@ -163,15 +135,6 @@ namespace Leapers_Blue_Rangers
                     Name = "Vladmir Putin"
                 }
             };
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> master
-=======
->>>>>>> master
-=======
-
-            
->>>>>>> master
         }
     }
 }
