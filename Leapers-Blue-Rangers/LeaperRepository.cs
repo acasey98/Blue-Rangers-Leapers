@@ -6,14 +6,14 @@ namespace Leapers_Blue_Rangers
 {
     class LeaperRepository
     {
-        static List<Leaper> leapers = new List<Leaper>() { 
+        static List<Leaper> leapers = new List<Leaper>() {
                 new Leaper
                 {
                    ID = 0,
                    Name = "Johnnie",
-                   CurrentDateTime = new DateTime(2016,11,08),
-                   CurrentEventID = 0,
-                   CurrentHostID = 5,
+                   CurrentDateTime = DateTime.Today,
+                   CurrentEventID = 100,
+                   CurrentHostID = 100,
 
                 },
 
@@ -21,18 +21,18 @@ namespace Leapers_Blue_Rangers
                 {
                     ID = 1,
                     Name = "Jesse",
-                    CurrentDateTime = new DateTime(1998,08,17),
-                    CurrentEventID = 1,
-                    CurrentHostID = 1,
+                    CurrentDateTime = DateTime.Today,
+                    CurrentEventID = 100,
+                    CurrentHostID = 100,
                 },
 
                 new Leaper
                 {
                     ID = 2,
                     Name = "Jackie",
-                    CurrentDateTime = new DateTime(2016,11,08),
-                    CurrentEventID = 0,
-                    CurrentHostID = 6,
+                    CurrentDateTime = DateTime.Today,
+                    CurrentEventID = 100,
+                    CurrentHostID = 100,
                 }
             };
 
