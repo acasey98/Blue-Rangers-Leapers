@@ -8,10 +8,16 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {        
-           
-
-            Leaper pickALeaper()
+            int RandomNumber(int min, int max)
             {
+                Random random = new Random();
+                return random.Next(min, max);
+            }
+
+            Leaper pickALeaper(string whyTheyPicked)
+            {
+                // changes the phrase shown depending on what option they picked
+                var doThisThing = (whyTheyPicked == "1" ? "get leapin": "show their leaps");
                 // A large number just so it goes
                 var leaperPickedNumber = "";
                 // initializes a new repo class
@@ -21,7 +27,7 @@ namespace Leapers_Blue_Rangers
                 // while the number picked is not the options we need, repeat the question
                 while(leaperPickedNumber != "1" & leaperPickedNumber != "2" & leaperPickedNumber != "3")
                 {
-                    Console.WriteLine("Please pick a leaper to get leapin");
+                    Console.WriteLine($"Please pick a leaper to {doThisThing}");
                     for (var i = 0; i < leapers.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}. {leapers[i].Name}");
@@ -39,7 +45,7 @@ namespace Leapers_Blue_Rangers
                 var hosts = hostRepo.GetHosts();
 
                 var hostId = 1000;
-                foreach(var (key, value) in SingleEvent.Hosts)
+                foreach (var (key, value) in SingleEvent.Hosts)
                 {
                     if (!value)
                     {
@@ -50,7 +56,18 @@ namespace Leapers_Blue_Rangers
                 }
                 var pickedHost = hosts.First(host => host.ID == hostId);
                 return pickedHost;
-                
+            }
+
+            Event pickRandomEvent(Leaper pickedLeaper)
+            {
+                var eventsRepo = new EventsRepository();
+                var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
+                if (eventsAvailableToLeap.Length > 0)
+                {
+                    var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
+                    return randomEvent;
+                }
+                return null;
             }
 
             var response = "";
@@ -65,28 +82,37 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
-                    var pickedLeaper = pickALeaper();
-/*                    var eventsRepo = new EventsRepository();
-                    var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
-                    // TODO If events is empty than GAMEOVER
-                    var randomEvent = events[RandomNumber(0, events.Count())]
-                    var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
-                    var PickHost = pickAHost();
                     // if hostPicked is empty than find another event
+                    var pickedLeaper = pickALeaper(response);
+                    var randomEvent = pickRandomEvent(pickedLeaper);
+                    var PickedHost = PickAHost(randomEvent);
+                        if (randomEvent == null)
+                    {
+                        Console.WriteLine("Congrats MFer, you won!");
+                        Console.ReadLine();
+                        response = "q";
+                    }
                     response = "";
-                    // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
                 }
                 while(response == "2")
                 {
                     Budget.AddMoney();
                     response = "";
-                    // Does the budget stuff, then at the end changes the response variable to an empty string which goes back to the main menu
                 }
                 while(response =="3")
                 {
-                    Console.WriteLine("You picked three");
+                    var pickedLeaper = pickALeaper(response);
+                    var leapRepo = new LeapRepository();
+                    var leaps = leapRepo.GetLeaps(pickedLeaper);
+                    foreach(string leap in leaps)
+                    {
+                        Console.WriteLine(leap);
+                    }
+                    if (leaps.Count == 0)
+                    {
+                        Console.WriteLine("They haven't leaped yet! Try sending them out on their first leap");
+                    }
                     response = "";
-                    // Does the show past leaps stuff, then at the end changes the response variable to an empty string which goes back to the main menu
                 }
                 if (response.ToLower() == "q")
                 {

@@ -6,8 +6,8 @@ namespace Leapers_Blue_Rangers
 {
     class EventsRepository
     {
-        static List<Event> _events = new List<Event>() {
-
+        static List<Event> _events = new List<Event>()
+        {
             new Event
                 {
                  ID = 0,
@@ -47,11 +47,16 @@ namespace Leapers_Blue_Rangers
                  },
                  isPutRight = false
                 }
-                };
+        };
 
         public List<Event> GetEvents()
         {
             return _events;
+        }
+
+        public void SaveNewEvent(Event newEvent)
+        {
+            throw new NotImplementedException();
         }
     }
 }
