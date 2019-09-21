@@ -39,6 +39,25 @@ namespace Leapers_Blue_Rangers
                 return leaperPicked;
             }
 
+            Host PickAHost(Event SingleEvent)
+            {
+                var hostRepo = new HostRepository();
+                var hosts = hostRepo.GetHosts();
+
+                var hostId = 1000;
+                foreach (var (key, value) in SingleEvent.Hosts)
+                {
+                    if (!value)
+                    {
+                        hostId = key;
+
+                        break;
+                    }
+                }
+                var pickedHost = hosts.First(host => host.ID == hostId);
+                return pickedHost;
+            }
+
             Event pickRandomEvent(Leaper pickedLeaper)
             {
                 var eventsRepo = new EventsRepository();
@@ -63,9 +82,11 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
+                    // if hostPicked is empty than find another event
                     var pickedLeaper = pickALeaper(response);
                     var randomEvent = pickRandomEvent(pickedLeaper);
-                    if (randomEvent == null)
+                    var PickedHost = PickAHost(randomEvent);
+                        if (randomEvent == null)
                     {
                         Console.WriteLine("Congrats MFer, you won!");
                         Console.ReadLine();
