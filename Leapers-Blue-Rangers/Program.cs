@@ -33,6 +33,26 @@ namespace Leapers_Blue_Rangers
                 return leaperPicked;
             }
 
+            Host PickAHost(Event SingleEvent)
+            {
+                var hostRepo = new HostRepository();
+                var hosts = hostRepo.GetHosts();
+
+                var hostId = 1000;
+                foreach(var (key, value) in SingleEvent.Hosts)
+                {
+                    if (!value)
+                    {
+                        hostId = key;
+
+                        break;
+                    }
+                }
+                var pickedHost = hosts.First(host => host.ID == hostId);
+                return pickedHost;
+                
+            }
+
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
             while (runsTheGame)
@@ -49,8 +69,9 @@ namespace Leapers_Blue_Rangers
 /*                    var eventsRepo = new EventsRepository();
                     var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
                     // TODO If events is empty than GAMEOVER
-                    var randomEvent = events[RandomNumber(0, events.Count())];
+                    var randomEvent = events[RandomNumber(0, events.Count())]
                     var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
+                    var PickHost = pickAHost();
                     // if hostPicked is empty than find another event
                     response = "";
                     // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
