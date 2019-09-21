@@ -29,9 +29,9 @@ namespace Leapers_Blue_Rangers
                     Description = "Clinton testimony",
                     Hosts = new Dictionary<int, bool>
                     {
-                        { 5, false },
-                        { 6, false },
-                        { 7, false }
+                        { 0, false },
+                        { 1, false },
+                        { 2, false }
                     },
                     isPutRight = false
                 },
@@ -42,9 +42,9 @@ namespace Leapers_Blue_Rangers
                     Description = "Kanye interrupts T-Swift VMA speech",
                     Hosts = new Dictionary<int, bool>
                     {
-                        { 5, false },
-                        { 6, false },
-                        { 7, false }
+                        { 3, false },
+                        { 4, false },
+                        { 5, false }
                     },
                     isPutRight = false
                 }
@@ -60,38 +60,6 @@ namespace Leapers_Blue_Rangers
             {
                 return RandomNumber(0, Events.Count);
             }
-
-
-         /*   var Leapers = new List<Leaper>() {
-
-                new Leaper
-                {
-                   ID = 0,
-                   Name = "Johnnie",
-                   CurrentDateTime = ,
-                   CurrentEventID = ,
-                   CurrentHostID = 5,
-
-                },
-
-                new Leaper
-                {
-                    ID = 1,
-                    Name = "Jesse",
-                    CurrentDateTime = ,
-                    CurrentEventID = ,
-                    CurrentHostID = 1,
-                },
-
-                new Leaper
-                {
-                    ID = 3,
-                    Name = "Jackie",
-                    CurrentDateTime = ,
-                    CurrentEventID = ,
-                    CurrentHostID = 6,
-                }
-            };*/
                   
             var Hosts = new List<Host>()
             {
@@ -149,6 +117,21 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
+                    var leaperRepo = new LeaperRepository();
+                    var leapers = leaperRepo.GetAll();
+                    Console.WriteLine("Please pick a leaper to get leapin");
+                    for(var i = 0; i < leapers.Count(); i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {leaperRepo.Name}");
+                    }
+                    var leaperPickedNumber = Console.ReadLine();
+                    var leaperPicked = leaperRepo.First(Leaper => Leaper.ID == (leaperPickedNumber - 1)).ToArray();
+                    var eventsRepo = new EventsRepository();
+                    var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
+                    // TODO If events is empty than GAMEOVER
+                    var randomEvent = events[RandomNumber(0, events.Count())];
+                    var hostPicked = randomEvent.Hosts.First((key, value) => value == false);
+                    // if hostPicked is empty than find another event
                     response = "";
                     // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
                 }
