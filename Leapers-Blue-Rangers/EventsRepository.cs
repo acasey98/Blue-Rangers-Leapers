@@ -7,7 +7,6 @@ namespace Leapers_Blue_Rangers
     class EventsRepository
     {
         static List<Event> _events = new List<Event>() {
-
             new Event
                 {
                  ID = 0,

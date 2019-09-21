@@ -8,11 +8,10 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {        
-           
-
             Leaper pickALeaper(string whyTheyPicked)
             {
-                var doing = (whyTheyPicked == "1" ? "get leapin": "show their leaps");
+                // changes the phrase shown depending on what option they picked
+                var doThisThing = (whyTheyPicked == "1" ? "get leapin": "show their leaps");
                 // A large number just so it goes
                 var leaperPickedNumber = "";
                 // initializes a new repo class
@@ -22,7 +21,7 @@ namespace Leapers_Blue_Rangers
                 // while the number picked is not the options we need, repeat the question
                 while(leaperPickedNumber != "1" & leaperPickedNumber != "2" & leaperPickedNumber != "3")
                 {
-                    Console.WriteLine($"Please pick a leaper to {doing}");
+                    Console.WriteLine($"Please pick a leaper to {doThisThing}");
                     for (var i = 0; i < leapers.Count; i++)
                     {
                         Console.WriteLine($"{i + 1}. {leapers[i].Name}");
@@ -47,13 +46,6 @@ namespace Leapers_Blue_Rangers
                 {
                     Console.WriteLine("You picked one");
                     var pickedLeaper = pickALeaper(response);
-/*                  var eventsRepo = new EventsRepository();
-                    var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
-                    // TODO If events is empty than GAMEOVER
-                    var randomEvent = events[RandomNumber(0, events.Count())];
-                    var hostPicked = randomEvent.Hosts.First((key, value) => value == false);
-*/
-                    // if hostPicked is empty than find another event
                     response = "";
                 }
                 while(response == "2")
@@ -72,7 +64,7 @@ namespace Leapers_Blue_Rangers
                     }
                     if (leaps.Count == 0)
                     {
-                        Console.WriteLine("They haven't leaped yet! Try sending them out on a new leap");
+                        Console.WriteLine("They haven't leaped yet! Try sending them out on their first leap");
                     }
                     response = "";
                 }
