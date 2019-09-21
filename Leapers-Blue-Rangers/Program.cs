@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Leapers_Blue_Rangers
 {
     class Program
     {
         static void Main(string[] args)
+<<<<<<< HEAD
         {
             var Events = new List<Event>()
             {
@@ -93,6 +95,9 @@ namespace Leapers_Blue_Rangers
                 }
             };*/
                   
+=======
+        {        
+>>>>>>> master
             var Hosts = new List<Host>()
             {
                 new Host
@@ -137,6 +142,29 @@ namespace Leapers_Blue_Rangers
                 }
             };
 
+            Leaper pickALeaper()
+            {
+                // A large number just so it goes
+                var leaperPickedNumber = "";
+                // initializes a new repo class
+                var leaperRepo = new LeaperRepository();
+                // leapers is now a list of all the Leapers
+                var leapers = leaperRepo.GetAll();
+                // while the number picked is not the options we need, repeat the question
+                while(leaperPickedNumber != "1" & leaperPickedNumber != "2" & leaperPickedNumber != "3")
+                {
+                    Console.WriteLine("Please pick a leaper to get leapin");
+                    for (var i = 0; i < leapers.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {leapers[i].Name}");
+                    }
+                    leaperPickedNumber = Console.ReadLine();
+                }
+                var leaperPicked = leapers.First(Leaper => Leaper.ID == (Int32.Parse(leaperPickedNumber) - 1));
+                Console.WriteLine($"You picked {leaperPicked.Name}");
+                return leaperPicked;
+            }
+
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
             while (runsTheGame)
@@ -149,6 +177,13 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
+                    var pickedLeaper = pickALeaper();
+/*                    var eventsRepo = new EventsRepository();
+                    var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
+                    // TODO If events is empty than GAMEOVER
+                    var randomEvent = events[RandomNumber(0, events.Count())];
+                    var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
+                    // if hostPicked is empty than find another event
                     response = "";
                     // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
                 }
