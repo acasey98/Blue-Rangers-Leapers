@@ -8,49 +8,7 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {        
-            var Hosts = new List<Host>()
-            {
-                new Host
-                {
-                    ID = 0,
-                    Name = "Cigar"
-                },
-                new Host
-                {
-                    ID = 1,
-                    Name = "Bill Clinton"
-                },
-                new Host
-                {
-                    ID = 2,
-                    Name = "Monica Lewinsky"
-                },
-                new Host
-                {
-                    ID = 3,
-                    Name = "Kanye West"
-                },
-                new Host
-                {
-                    ID = 4,
-                    Name = "VMA Judge"
-                },
-                new Host
-                {
-                    ID = 5,
-                    Name = "Voter"
-                },
-                new Host
-                {
-                    ID = 6,
-                    Name = "Donald Trump"
-                },
-                new Host
-                {
-                    ID = 7,
-                    Name = "Vladmir Putin"
-                }
-            };
+           
 
             Leaper pickALeaper(string whyTheyPicked)
             {
@@ -97,13 +55,11 @@ namespace Leapers_Blue_Rangers
 */
                     // if hostPicked is empty than find another event
                     response = "";
-                    // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
                 }
                 while(response == "2")
                 {
-                    Console.WriteLine("You picked two");
+                    Budget.AddMoney();
                     response = "";
-                    // Does the budget stuff, then at the end changes the response variable to an empty string which goes back to the main menu
                 }
                 while(response =="3")
                 {
@@ -119,7 +75,6 @@ namespace Leapers_Blue_Rangers
                         Console.WriteLine("They haven't leaped yet! Try sending them out on a new leap");
                     }
                     response = "";
-                    // Does the show past leaps stuff, then at the end changes the response variable to an empty string which goes back to the main menu
                 }
                 if (response.ToLower() == "q")
                 {
