@@ -19,7 +19,6 @@ namespace Leapers_Blue_Rangers
         public void SaveNewLeap(Leap newLeap)
         {
             _leaps.Add(newLeap);
-
         }
 
     }
