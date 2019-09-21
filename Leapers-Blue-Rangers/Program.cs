@@ -46,6 +46,7 @@ namespace Leapers_Blue_Rangers
                 {
                     Console.WriteLine("You picked one");
                     var pickedLeaper = pickALeaper();
+                    Budget.BudgetCheck(/*leaperToCheck, eventToCheck*/);
 /*                    var eventsRepo = new EventsRepository();
                     var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
                     // TODO If events is empty than GAMEOVER

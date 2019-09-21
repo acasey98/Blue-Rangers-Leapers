@@ -44,22 +44,42 @@ namespace Leapers_Blue_Rangers
                     break;
             }
             Console.WriteLine($"Your new budget is ${_budget}.");
+            var pickedLeaper = pickALeaper();
         }
 
-        public Boolean BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
+        public static bool BudgetCheck(/*Leaper leaperToCheck, Event eventToCheck*/)
         {
-            var leaperDate = leaperToCheck.CurrentDateTime;
-            var eventDate = eventToCheck.DateTime;
+            var leaperDate = new DateTime(1993, 11, 08); //leaperToCheck.CurrentDateTime;
+            var eventDate = new DateTime(1943, 06, 12);//eventToCheck.DateTime;
             TimeSpan differenceBetweenDates = leaperDate - eventDate;
             // makes it a positive number incase it was a negative
-            var differenceInDays = Math.Abs(differenceBetweenDates.Days);
+            var travelCost = Math.Abs(differenceBetweenDates.Days) * 1000;
+            Console.WriteLine($"Cost of {Math.Abs(differenceBetweenDates.Days)} day leap: ${travelCost}.");
 
-            if ((differenceInDays * 1000) > _budget)
+            if (travelCost <= _budget)
             {
+                _budget -= travelCost;
+                Console.WriteLine($"New Budget: {_budget}.");
                 return true;
             }
             else
             {
+                Console.WriteLine($"Insufficient funds budgeted for selected leap. Please try again or request additional funds.\n" +
+                    $"1: Request additional funds.\n" +
+                    $"2: Attempt another leap.");
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        AddMoney();                        
+                        break;
+                    case "2":
+                        Console.WriteLine("Returning to leaper selection.");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Input. Returning to leaper selection.");
+                        break;
+                }
                 return false;
             }
         }
