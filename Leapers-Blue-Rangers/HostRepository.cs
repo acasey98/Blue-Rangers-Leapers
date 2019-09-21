@@ -50,6 +50,11 @@ namespace Leapers_Blue_Rangers
                     Name = "Vladmir Putin"
                 }
         };
+
+        public List<Host> GetHosts()
+        {
+            return hosts;
+        }
     }
 }
 
