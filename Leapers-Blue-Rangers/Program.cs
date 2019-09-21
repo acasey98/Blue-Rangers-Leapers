@@ -57,7 +57,7 @@ namespace Leapers_Blue_Rangers
                 }
                 while(response == "2")
                 {
-                    Console.WriteLine("You picked two");
+                    Budget.AddMoney();
                     response = "";
                     // Does the budget stuff, then at the end changes the response variable to an empty string which goes back to the main menu
                 }
