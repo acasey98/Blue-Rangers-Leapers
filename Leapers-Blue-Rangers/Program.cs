@@ -8,6 +8,12 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {        
+            int RandomNumber(int min, int max)
+            {
+                Random random = new Random();
+                return random.Next(min, max);
+            }
+
             Leaper pickALeaper(string whyTheyPicked)
             {
                 // changes the phrase shown depending on what option they picked
@@ -33,6 +39,18 @@ namespace Leapers_Blue_Rangers
                 return leaperPicked;
             }
 
+            Event pickRandomEvent(Leaper pickedLeaper)
+            {
+                var eventsRepo = new EventsRepository();
+                var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
+                if (eventsAvailableToLeap.Length > 0)
+                {
+                    var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
+                    return randomEvent;
+                }
+                return null;
+            }
+
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
             while (runsTheGame)
@@ -46,6 +64,13 @@ namespace Leapers_Blue_Rangers
                 {
                     Console.WriteLine("You picked one");
                     var pickedLeaper = pickALeaper(response);
+                    var randomEvent = pickRandomEvent(pickedLeaper);
+                    if (randomEvent == null)
+                    {
+                        Console.WriteLine("Congrats MFer, you won!");
+                        Console.ReadLine();
+                        response = "q";
+                    }
                     response = "";
                 }
                 while(response == "2")
