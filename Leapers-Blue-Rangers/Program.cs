@@ -29,9 +29,9 @@ namespace Leapers_Blue_Rangers
                     Description = "Clinton testimony",
                     Hosts = new Dictionary<int, bool>
                     {
-                        { 5, false },
-                        { 6, false },
-                        { 7, false }
+                        { 0, false },
+                        { 1, false },
+                        { 2, false }
                     },
                     isPutRight = false
                 },
@@ -42,9 +42,9 @@ namespace Leapers_Blue_Rangers
                     Description = "Kanye interrupts T-Swift VMA speech",
                     Hosts = new Dictionary<int, bool>
                     {
-                        { 5, false },
-                        { 6, false },
-                        { 7, false }
+                        { 3, false },
+                        { 4, false },
+                        { 5, false }
                     },
                     isPutRight = false
                 }
@@ -60,9 +60,36 @@ namespace Leapers_Blue_Rangers
             {
                 return RandomNumber(0, Events.Count);
             }
+<<<<<<< HEAD
+
+            var Leapers = new List<Leaper>() {
+
+                new Leaper
+                {
+                   ID = 0,
+                   Name = "Johnnie",
+                   CurrentDateTime = ,
+                   CurrentEventID = ,
+                   CurrentHostID = 5,
+
+                },
+=======
+>>>>>>> master
 
 
+<<<<<<< HEAD
+                new Leaper
+                {
+                    ID = 3,
+                    Name = "Jackie",
+                    CurrentDateTime = ,
+                    CurrentEventID = ,
+                    CurrentHostID = 6,
+                }
+            };
+=======
          
+>>>>>>> master
                   
             var Hosts = new List<Host>()
             {
@@ -107,6 +134,8 @@ namespace Leapers_Blue_Rangers
                     Name = "Vladmir Putin"
                 }
             };
+<<<<<<< HEAD
+=======
 
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
@@ -140,6 +169,7 @@ namespace Leapers_Blue_Rangers
                     break;
                 }
             }
+>>>>>>> master
         }
     }
 }
