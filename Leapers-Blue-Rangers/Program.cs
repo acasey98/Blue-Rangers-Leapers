@@ -52,6 +52,12 @@ namespace Leapers_Blue_Rangers
                 }
             };
 
+            int RandomNumber(int min, int max)
+            {
+                Random random = new Random();
+                return random.Next(min, max);
+            }
+
             Leaper pickALeaper()
             {
                 // A large number just so it goes
@@ -88,11 +94,18 @@ namespace Leapers_Blue_Rangers
                 {
                     Console.WriteLine("You picked one");
                     var pickedLeaper = pickALeaper();
-/*                    var eventsRepo = new EventsRepository();
-                    var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
-                    // TODO If events is empty than GAMEOVER
-                    var randomEvent = events[RandomNumber(0, events.Count())];
-                    var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
+                    var eventsRepo = new EventsRepository();
+                    var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickALeaper().CurrentDateTime).ToArray();
+                    if (eventsAvailableToLeap.Length > 0)
+                    {
+                        var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
+                    }
+
+                    /*                    var eventsRepo = new EventsRepository();
+                                        var events = eventsRepo.GetAll().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != leaperPicked.CurrentDateTime).ToArray();
+                                        // TODO If events is empty than GAMEOVER
+                                        var randomEvent = events[RandomNumber(0, events.Count())];
+                                        var hostPicked = randomEvent.Hosts.First((key, value) => value == false);*/
                     // if hostPicked is empty than find another event
                     response = "";
                     // Does whatever we do in 1, then at the end changes the response variable to an empty string which goes back to main menu
