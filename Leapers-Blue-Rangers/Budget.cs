@@ -6,7 +6,7 @@ namespace Leapers_Blue_Rangers
 {
     class Budget
     {
-        static int _budget = 15000000;   
+        static int _budget = 1000000;   
 
 
         public static void AddMoney()
@@ -46,21 +46,45 @@ namespace Leapers_Blue_Rangers
             Console.WriteLine($"Your new budget is ${_budget}.");
         }
 
-        public Boolean BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
+        public static bool BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
         {
             var leaperDate = leaperToCheck.CurrentDateTime;
             var eventDate = eventToCheck.DateTime;
             TimeSpan differenceBetweenDates = leaperDate - eventDate;
             // makes it a positive number incase it was a negative
-            var differenceInDays = Math.Abs(differenceBetweenDates.Days);
+            var travelCost = Math.Abs(differenceBetweenDates.Days) * 1000;
+            Console.WriteLine($"Cost of {Math.Abs(differenceBetweenDates.Days)} day leap: ${travelCost}.");
 
-            if ((differenceInDays * 1000) > _budget)
+            if (travelCost <= _budget)
             {
+                _budget -= travelCost;
+                Console.WriteLine($"New Budget: {_budget}.");
                 return true;
             }
             else
             {
-                return false;
+                do
+                {
+                    Console.WriteLine($"Insufficient funds budgeted for selected leap. Please try again or request additional funds.\n" +
+                        $"1: Request additional funds.\n" +
+                        $"2: Attempt another leap.");
+                    var choice = Console.ReadLine();
+                    switch (choice)
+                    {
+                        case "1":
+                            AddMoney();                            
+                            break;
+                        case "2":
+                            Console.WriteLine("Returning to leaper selection.");
+                            return false;
+                        default:
+                            Console.WriteLine("Invalid Input. Returning to leaper selection.");
+                            return false;
+                    }                    
+                } while (travelCost > _budget);
+                _budget -= travelCost;
+                Console.WriteLine($"New Budget: {_budget}.");
+                return true;
             }
         }
     }

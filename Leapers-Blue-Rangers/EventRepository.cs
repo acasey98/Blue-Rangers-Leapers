@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Leapers_Blue_Rangers
 {
-    class EventsRepository
+    class EventRepository
     {
         static List<Event> _events = new List<Event>()
         {
