@@ -16,9 +16,9 @@ namespace Leapers_Blue_Rangers
             return leapsToReturn;
         }
 
-        public static void SaveNewLeap(Leap newLeap)
+        public void SaveNewLeap(Leap newLeap)
         {
-            _leaps.Add(newLeap);
+            _leaps.Add(newLeap);            
         }
 
     }

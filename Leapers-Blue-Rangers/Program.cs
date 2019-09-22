@@ -7,7 +7,11 @@ namespace Leapers_Blue_Rangers
     class Program
     {
         static void Main(string[] args)
-        {        
+        {
+
+            //instantiates the leap repo for the rest of the code
+            var leapRepo = new LeapRepository();
+
             int RandomNumber(int min, int max)
             {
                 Random random = new Random();
@@ -108,8 +112,11 @@ namespace Leapers_Blue_Rangers
                             Leaper = pickedLeaper,
                             Host = PickedHost,
                             SingleEvent = randomEvent,
-                        };
-                        LeapRepository.SaveNewLeap(newLeap);
+                        };                        
+                        leapRepo.SaveNewLeap(newLeap);
+                        //Now the appropriate bool values of the previous and leapt to event's hosts must be changed.
+                        //also check the previous event of the leaper and switch its `isPutRight` to true.
+                        //The CurrentDateTime, CurrentEventID, CurrentHostID properties must be changed according to the new event and host leapt to. 
                     }
                     response = "";
                 }
@@ -120,8 +127,7 @@ namespace Leapers_Blue_Rangers
                 }
                 while(response =="3")
                 {
-                    var pickedLeaper = pickALeaper(response);
-                    var leapRepo = new LeapRepository();
+                    var pickedLeaper = pickALeaper(response);                    
                     var leaps = leapRepo.GetLeaps(pickedLeaper);
                     foreach(string leap in leaps)
                     {

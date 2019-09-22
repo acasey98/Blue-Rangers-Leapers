@@ -63,24 +63,28 @@ namespace Leapers_Blue_Rangers
             }
             else
             {
-                Console.WriteLine($"Insufficient funds budgeted for selected leap. Please try again or request additional funds.\n" +
-                    $"1: Request additional funds.\n" +
-                    $"2: Attempt another leap.");
-                var choice = Console.ReadLine();
-                switch (choice)
+                do
                 {
-                    case "1":
-                        AddMoney();
-                        BudgetCheck(leaperToCheck, eventToCheck);
-                        break;
-                    case "2":
-                        Console.WriteLine("Returning to leaper selection.");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid Input. Returning to leaper selection.");
-                        break;
-                }
-                return false;
+                    Console.WriteLine($"Insufficient funds budgeted for selected leap. Please try again or request additional funds.\n" +
+                        $"1: Request additional funds.\n" +
+                        $"2: Attempt another leap.");
+                    var choice = Console.ReadLine();
+                    switch (choice)
+                    {
+                        case "1":
+                            AddMoney();                            
+                            break;
+                        case "2":
+                            Console.WriteLine("Returning to leaper selection.");
+                            return false;
+                        default:
+                            Console.WriteLine("Invalid Input. Returning to leaper selection.");
+                            return false;
+                    }                    
+                } while (travelCost > _budget);
+                _budget -= travelCost;
+                Console.WriteLine($"New Budget: {_budget}.");
+                return true;
             }
         }
     }
