@@ -6,7 +6,7 @@ namespace Leapers_Blue_Rangers
 {
     class Budget
     {
-        static int _budget = 15000000;   
+        static int _budget = 1000000;   
 
 
         public static void AddMoney()
