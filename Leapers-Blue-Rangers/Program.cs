@@ -8,6 +8,12 @@ namespace Leapers_Blue_Rangers
     {
         static void Main(string[] args)
         {        
+            int RandomNumber(int min, int max)
+            {
+                Random random = new Random();
+                return random.Next(min, max);
+            }
+
             Leaper pickALeaper(string whyTheyPicked)
             {
                 // changes the phrase shown depending on what option they picked
@@ -33,6 +39,37 @@ namespace Leapers_Blue_Rangers
                 return leaperPicked;
             }
 
+            Host PickAHost(Event SingleEvent)
+            {
+                var hostRepo = new HostRepository();
+                var hosts = hostRepo.GetHosts();
+
+                var hostId = 1000;
+                foreach (var (key, value) in SingleEvent.Hosts)
+                {
+                    if (!value)
+                    {
+                        hostId = key;
+
+                        break;
+                    }
+                }
+                var pickedHost = hosts.First(host => host.ID == hostId);
+                return pickedHost;
+            }
+
+            Event pickRandomEvent(Leaper pickedLeaper)
+            {
+                var eventsRepo = new EventsRepository();
+                var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
+                if (eventsAvailableToLeap.Length > 0)
+                {
+                    var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
+                    return randomEvent;
+                }
+                return null;
+            }
+
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
             while (runsTheGame)
@@ -45,18 +82,30 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
-                    var pickedLeaper = pickALeaper(response);
-                    if (Budget.BudgetCheck(pickedLeaper, eventToCheck) == false)
+                    // if hostPicked is empty than find another event
+                    var pickedLeaper = pickALeaper(response);                    
+                    var randomEvent = pickRandomEvent(pickedLeaper);
+                    var PickedHost = PickAHost(randomEvent);
+                        if (randomEvent == null)
                     {
+                        Console.WriteLine("Congrats MFer, you won!");
+                        Console.ReadLine();
+                        response = "q";
+                    }
+                    if (Budget.BudgetCheck(pickedLeaper, randomEvent) == false)
+                    {
+                        //This code will execute when the user decides they do not want to add funds, and would rather try to leap again
                         response = "";
                         break;
-                    } else
-                    {
-                        
                     }
-                    
+                    else
+                    {
+                        //This code will execute when the user has sufficient funds in the budget
+
+                    }
+                    response = "";
                 }
-                while(response == "2")
+                while (response == "2")
                 {
                     Budget.AddMoney();
                     response = "";
