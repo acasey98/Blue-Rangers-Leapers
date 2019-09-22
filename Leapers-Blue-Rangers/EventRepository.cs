@@ -53,10 +53,5 @@ namespace Leapers_Blue_Rangers
         {
             return _events;
         }
-
-        public void SaveNewEvent(Event newEvent)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

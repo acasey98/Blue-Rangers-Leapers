@@ -42,10 +42,13 @@ namespace Leapers_Blue_Rangers
             Event pickRandomEvent(Leaper pickedLeaper)
             {
                 var eventsRepo = new EventsRepository();
+                // Prevents the current event and also events that have been put right from being selected
                 var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
                 if (eventsAvailableToLeap.Length > 0)
                 {
+                    // Selects a random event by randomizing an index position of all available events
                     var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
+                    randomEvent.isPutRight = true;
                     return randomEvent;
                 }
                 return null;
@@ -67,7 +70,7 @@ namespace Leapers_Blue_Rangers
                     var randomEvent = pickRandomEvent(pickedLeaper);
                     if (randomEvent == null)
                     {
-                        Console.WriteLine("Congrats MFer, you won!");
+                        Console.WriteLine("Congrats n00b, you won!");
                         Console.ReadLine();
                         response = "q";
                     }
