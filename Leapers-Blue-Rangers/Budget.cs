@@ -46,7 +46,7 @@ namespace Leapers_Blue_Rangers
             Console.WriteLine($"Your new budget is ${_budget}.");
         }
 
-        public static void BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
+        public static bool BudgetCheck(Leaper leaperToCheck, Event eventToCheck)
         {
             var leaperDate = leaperToCheck.CurrentDateTime;
             var eventDate = eventToCheck.DateTime;
@@ -59,6 +59,7 @@ namespace Leapers_Blue_Rangers
             {
                 _budget -= travelCost;
                 Console.WriteLine($"New Budget: {_budget}.");
+                return true;
             }
             else
             {
@@ -79,6 +80,7 @@ namespace Leapers_Blue_Rangers
                         Console.WriteLine("Invalid Input. Returning to leaper selection.");
                         break;
                 }
+                return false;
             }
         }
     }

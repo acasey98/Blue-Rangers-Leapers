@@ -46,8 +46,15 @@ namespace Leapers_Blue_Rangers
                 {
                     Console.WriteLine("You picked one");
                     var pickedLeaper = pickALeaper(response);
-                    Budget.BudgetCheck(pickedLeaper, eventToCheck);
-                    response = "";
+                    if (Budget.BudgetCheck(pickedLeaper, eventToCheck) == false)
+                    {
+                        response = "";
+                        break;
+                    } else
+                    {
+                        
+                    }
+                    
                 }
                 while(response == "2")
                 {
