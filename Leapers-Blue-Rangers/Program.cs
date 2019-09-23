@@ -76,6 +76,7 @@ namespace Leapers_Blue_Rangers
 
             var response = "";
             var runsTheGame = (response != "1" || response != "2" || response != "3" || response != "q");
+            Console.WriteLine("Welcome To Quantom Leap!");
             while (runsTheGame)
             {
                 Console.WriteLine("Please select one of the following options or press 'q' to quit");
@@ -89,13 +90,14 @@ namespace Leapers_Blue_Rangers
                     // if hostPicked is empty than find another event
                     var pickedLeaper = pickALeaper(response);                    
                     var randomEvent = pickRandomEvent(pickedLeaper);
-                    var PickedHost = PickAHost(randomEvent);
-                        if (randomEvent == null)
+                    if (randomEvent == null)
                     {
                         Console.WriteLine("Congrats MFer, you won!");
                         Console.ReadLine();
                         response = "q";
+                        break;
                     }
+                    var pickedHost = PickAHost(randomEvent);
                     if (Budget.BudgetCheck(pickedLeaper, randomEvent) == false)
                     {
                         //This code will execute when the user decides they do not want to add funds, and would rather try to leap again
@@ -110,7 +112,7 @@ namespace Leapers_Blue_Rangers
                         var newLeap = new Leap
                         {
                             Leaper = pickedLeaper,
-                            Host = PickedHost,
+                            Host = pickedHost,
                             SingleEvent = randomEvent,
                         };                        
                         leapRepo.SaveNewLeap(newLeap);
@@ -129,9 +131,10 @@ namespace Leapers_Blue_Rangers
                 {
                     var pickedLeaper = pickALeaper(response);                    
                     var leaps = leapRepo.GetLeaps(pickedLeaper);
+                    Console.WriteLine($"These are {pickedLeaper.Name}'s Leaps:");
                     foreach(string leap in leaps)
                     {
-                        Console.WriteLine(leap);
+                        Console.WriteLine($"{leap}\n");
                     }
                     if (leaps.Count == 0)
                     {
