@@ -41,7 +41,7 @@ namespace Leapers_Blue_Rangers
             return leapers;
         }
         public void ChangeLeaperInfo(Leaper leaper, Event events, Host host)
-        {
+        { 
             leaper.CurrentEventID = events.ID;
 
             leaper.CurrentDateTime = events.DateTime;
@@ -49,6 +49,5 @@ namespace Leapers_Blue_Rangers
             leaper.CurrentHostID = host.ID;
 
         }
-
     }
 }
