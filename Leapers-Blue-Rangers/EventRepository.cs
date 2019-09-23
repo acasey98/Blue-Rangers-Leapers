@@ -70,5 +70,34 @@ namespace Leapers_Blue_Rangers
                  isPutRight = false
                 }
         };
+<<<<<<< HEAD:Leapers-Blue-Rangers/EventRepository.cs
+=======
+
+        public List<Event> GetEvents()
+        {
+            return _events;
+        }
+
+        public void SaveNewEvent(Event newEvent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ChangeFinishedLeapInfo(Leaper leaper)
+        {
+            if (leaper.CurrentEventID == 100)
+            {
+                return;
+            }
+            var finishedLeap = _events.First(eventThing => eventThing.ID == leaper.CurrentEventID);
+            finishedLeap.isPutRight = true;
+            finishedLeap.Hosts[leaper.CurrentHostID] = false;
+        }
+
+        public void ChangeCurrentLeapInfo(Event eventThing, Host host)
+        {
+            eventThing.Hosts[host.ID] = true;
+        }
+>>>>>>> master:Leapers-Blue-Rangers/EventsRepository.cs
     }
 }

@@ -40,7 +40,14 @@ namespace Leapers_Blue_Rangers
         {
             return leapers;
         }
+        public void ChangeLeaperInfo(Leaper leaper, Event events, Host host)
+        { 
+            leaper.CurrentEventID = events.ID;
 
+            leaper.CurrentDateTime = events.DateTime;
 
+            leaper.CurrentHostID = host.ID;
+
+        }
     }
 }
