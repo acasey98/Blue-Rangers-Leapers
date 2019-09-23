@@ -108,7 +108,7 @@ namespace Leapers_Blue_Rangers
                     {
                         //This code will execute when the user has sufficient funds in the budget
                         //This is where the Leap should be instantiated using the previously generated data
-                        Console.WriteLine($"{pickedLeaper.Name} leaps from {(pickedLeaper.CurrentDateTime).ToString("dddd, dd MMMM yyyy")} to {(randomEvent.DateTime).ToString("dddd, dd MMMM yyyy")}.");
+                        Console.WriteLine($"{pickedLeaper.Name} leaps from {(pickedLeaper.CurrentDateTime).ToString("dddd, dd MMMM yyyy")} to {(randomEvent.DateTime).ToString("dddd, dd MMMM yyyy")} ({randomEvent.Description}).");
                         var newLeap = new Leap
                         {
                             Leaper = pickedLeaper,
