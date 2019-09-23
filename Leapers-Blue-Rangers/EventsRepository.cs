@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Leapers_Blue_Rangers
@@ -57,6 +58,22 @@ namespace Leapers_Blue_Rangers
         public void SaveNewEvent(Event newEvent)
         {
             throw new NotImplementedException();
+        }
+
+        public void ChangeFinishedLeapInfo(Leaper leaper)
+        {
+            if (leaper.CurrentEventID == 100)
+            {
+                return;
+            }
+            var finishedLeap = _events.First(eventThing => eventThing.ID == leaper.CurrentEventID);
+            finishedLeap.isPutRight = true;
+            finishedLeap.Hosts[leaper.CurrentHostID] = false;
+        }
+
+        public void ChangeCurrentLeapInfo(Event eventThing, Host host)
+        {
+            eventThing.Hosts[host.ID] = true;
         }
     }
 }

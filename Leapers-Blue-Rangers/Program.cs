@@ -117,7 +117,9 @@ namespace Leapers_Blue_Rangers
                         };                        
                         leapRepo.SaveNewLeap(newLeap);
                         var leaperRepo = new LeaperRepository();
-                        //Now the appropriate bool values of the previous and leapt to event's hosts must be changed.
+                        var eventRepo = new EventsRepository();
+                        eventRepo.ChangeFinishedLeapInfo(pickedLeaper);
+                        eventRepo.ChangeCurrentLeapInfo(randomEvent, pickedHost);
                         //also check the previous event of the leaper and switch its `isPutRight` to true.
                         leaperRepo.ChangeLeaperInfo(pickedLeaper, randomEvent, pickedHost);
                         //The CurrentDateTime, CurrentEventID, CurrentHostID properties must be changed according to the new event and host leapt to. 
