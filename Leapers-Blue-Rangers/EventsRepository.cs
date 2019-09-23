@@ -5,29 +5,8 @@ using System.Text;
 
 namespace Leapers_Blue_Rangers
 {
-    class EventRepository
+    class EventsRepository
     {
-        public List<Event> GetEvents()
-        {
-            return _events;
-        }
-
-        public void ChangeFinishedLeapInfo(Leaper leaper)
-        {
-            // selects the leaper's finished event and sets 'isPutRight' to true
-            var finishedEvent = GetEvents().Where(singleEvent => singleEvent.ID == leaper.CurrentEventID);
-            finishedEvent.Select(singleEvent => singleEvent.isPutRight = true).ToList();
-
-            // selects the finished Host and sets it back to false (the Host is becoming available again because the leaper is leaving this host & event)
-            finishedEvent.Select(singleEvent => singleEvent.Hosts[leaper.CurrentHostID] = false);
-
-        }
-
-        public void ChangeCurrentLeapInfo(Event event)
-        {
-            var startingEvent = GetEvents().Where(singleEvent => singleEvent.ID == event.ID);
-        }
-
         static List<Event> _events = new List<Event>()
         {
             new Event
@@ -70,9 +49,6 @@ namespace Leapers_Blue_Rangers
                  isPutRight = false
                 }
         };
-<<<<<<< HEAD:Leapers-Blue-Rangers/EventRepository.cs
-=======
-
         public List<Event> GetEvents()
         {
             return _events;
@@ -89,15 +65,30 @@ namespace Leapers_Blue_Rangers
             {
                 return;
             }
+            // selects the leaper's finished event and sets 'isPutRight' to true
             var finishedLeap = _events.First(eventThing => eventThing.ID == leaper.CurrentEventID);
             finishedLeap.isPutRight = true;
+
+            // selects the finished Host and sets it back to false (the Host is becoming available again because the leaper is leaving this host & event)
             finishedLeap.Hosts[leaper.CurrentHostID] = false;
+
+            // selects a random event - if the event's date is in the future, then there is a 15% chance the future event isPutRight will be set to false
+            var randomEvent = _events[RandomNumber(0, _events.Count())];
+            if (randomEvent.DateTime > leaper.CurrentDateTime && RandomNumber(1, 100) <= 15)
+            {
+                randomEvent.isPutRight = false;
+            }
         }
 
         public void ChangeCurrentLeapInfo(Event eventThing, Host host)
         {
             eventThing.Hosts[host.ID] = true;
         }
->>>>>>> master:Leapers-Blue-Rangers/EventsRepository.cs
+
+        int RandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
+        }
     }
 }

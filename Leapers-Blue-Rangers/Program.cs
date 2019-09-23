@@ -64,7 +64,7 @@ namespace Leapers_Blue_Rangers
 
             Event PickRandomEvent(Leaper pickedLeaper)
             {
-                var eventsRepo = new EventRepository();
+                var eventsRepo = new EventsRepository();
                 var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
                 if (eventsAvailableToLeap.Length > 0)
                 {
