@@ -53,6 +53,7 @@ namespace Leapers_Blue_Rangers
             TimeSpan differenceBetweenDates = leaperDate - eventDate;
             // makes it a positive number incase it was a negative
             var travelCost = Math.Abs(differenceBetweenDates.Days) * 1000;
+            Console.WriteLine($"Leaping from {leaperDate} to {eventDate}.");
             Console.WriteLine($"Cost of {Math.Abs(differenceBetweenDates.Days)} day leap: ${travelCost}.");
 
             if (travelCost <= _budget)
