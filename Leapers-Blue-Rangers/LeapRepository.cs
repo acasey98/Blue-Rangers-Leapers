@@ -11,7 +11,7 @@ namespace Leapers_Blue_Rangers
         public List<string> GetLeaps(Leaper leaperSelected)
         {
             var leapsToReturn = _leaps.Where(leap => leap.Leaper == leaperSelected)
-                .Select(leap => $"Location: {leap.SingleEvent.Description}\nDate: {leap.SingleEvent.DateTime}\nHost: {leap.Host.Name}")
+                .Select(leap => $"Location: {leap.SingleEvent.Description}\nDate: {(leap.SingleEvent.DateTime).ToString("dddd, dd MMMM yyyy")}\nHost: {leap.Host.Name}")
                 .ToList();
             return leapsToReturn;
         }
