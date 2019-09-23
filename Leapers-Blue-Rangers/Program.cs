@@ -92,7 +92,7 @@ namespace Leapers_Blue_Rangers
                     var randomEvent = PickRandomEvent(pickedLeaper);
                     if (randomEvent == null)
                     {
-                        Console.WriteLine("Congrats MFer, you won!");
+                        Console.WriteLine("Congrats n00b, you won!");
                         Console.ReadLine();
                         response = "q";
                         break;
