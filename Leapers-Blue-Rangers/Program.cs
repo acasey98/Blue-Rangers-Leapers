@@ -7,7 +7,11 @@ namespace Leapers_Blue_Rangers
     class Program
     {
         static void Main(string[] args)
-        {        
+        {
+
+            //instantiates the leap repo for the rest of the code
+            var leapRepo = new LeapRepository();
+
             int RandomNumber(int min, int max)
             {
                 Random random = new Random();
@@ -39,14 +43,31 @@ namespace Leapers_Blue_Rangers
                 return leaperPicked;
             }
 
+            Host PickAHost(Event SingleEvent)
+            {
+                var hostRepo = new HostRepository();
+                var hosts = hostRepo.GetHosts();
+
+                var hostId = 1000;
+                foreach (var (key, value) in SingleEvent.Hosts)
+                {
+                    if (!value)
+                    {
+                        hostId = key;
+
+                        break;
+                    }
+                }
+                var pickedHost = hosts.First(host => host.ID == hostId);
+                return pickedHost;
+            }
+
             Event pickRandomEvent(Leaper pickedLeaper)
             {
-                var eventsRepo = new EventRepository();
-                // Prevents the current event and also events that have been put right from being selected
+                var eventsRepo = new EventsRepository();
                 var eventsAvailableToLeap = eventsRepo.GetEvents().Where(singleEvent => singleEvent.isPutRight == false & singleEvent.DateTime != pickedLeaper.CurrentDateTime).ToArray();
                 if (eventsAvailableToLeap.Length > 0)
                 {
-                    // Selects a random event by randomizing an index position of all available events
                     var randomEvent = eventsAvailableToLeap[RandomNumber(0, eventsAvailableToLeap.Count())];
                     return randomEvent;
                 }
@@ -65,25 +86,48 @@ namespace Leapers_Blue_Rangers
                 while(response == "1")
                 {
                     Console.WriteLine("You picked one");
-                    var pickedLeaper = pickALeaper(response);
+                    // if hostPicked is empty than find another event
+                    var pickedLeaper = pickALeaper(response);                    
                     var randomEvent = pickRandomEvent(pickedLeaper);
-                    if (randomEvent == null)
+                    var PickedHost = PickAHost(randomEvent);
+                        if (randomEvent == null)
                     {
                         Console.WriteLine("Congrats n00b, you won!");
                         Console.ReadLine();
                         response = "q";
                     }
+                    if (Budget.BudgetCheck(pickedLeaper, randomEvent) == false)
+                    {
+                        //This code will execute when the user decides they do not want to add funds, and would rather try to leap again
+                        response = "";
+                        break;
+                    }
+                    else
+                    {
+                        //This code will execute when the user has sufficient funds in the budget
+                        //This is where the Leap should be instantiated using the previously generated data
+                        Console.WriteLine($"{pickedLeaper.Name} leaps from {pickedLeaper.CurrentDateTime} to {randomEvent.DateTime}.");
+                        var newLeap = new Leap
+                        {
+                            Leaper = pickedLeaper,
+                            Host = PickedHost,
+                            SingleEvent = randomEvent,
+                        };                        
+                        leapRepo.SaveNewLeap(newLeap);
+                        //Now the appropriate bool values of the previous and leapt to event's hosts must be changed.
+                        //also check the previous event of the leaper and switch its `isPutRight` to true.
+                        //The CurrentDateTime, CurrentEventID, CurrentHostID properties must be changed according to the new event and host leapt to. 
+                    }
                     response = "";
                 }
-                while(response == "2")
+                while (response == "2")
                 {
                     Budget.AddMoney();
                     response = "";
                 }
                 while(response =="3")
                 {
-                    var pickedLeaper = pickALeaper(response);
-                    var leapRepo = new LeapRepository();
+                    var pickedLeaper = pickALeaper(response);                    
                     var leaps = leapRepo.GetLeaps(pickedLeaper);
                     foreach(string leap in leaps)
                     {
